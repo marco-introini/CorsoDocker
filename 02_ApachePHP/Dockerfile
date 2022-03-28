@@ -8,8 +8,6 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     curl \
-    privoxy \
-    openvpn \
     runit
 
 RUN pecl install xdebug \

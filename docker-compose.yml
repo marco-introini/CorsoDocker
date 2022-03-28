@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  webserver:
+    build:
+      dockerfile: ./02_ApachePHP/Dockerfile
+    privileged: true
+    depends_on:
+      - db
+    restart: always
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    working_dir: /var/www/html/
+    volumes:
+      - ./html:/var/www/html/
+    ports:
+      - "8003:80"
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: mariadb
+      MYSQL_USER: mint
+      MYSQL_PASSWORD: mint
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+    ports:
+      - "33306:3306"
